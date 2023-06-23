@@ -1,0 +1,4 @@
+{
+    "$class": "com.acme.test.MyRequest",
+    "input": "World"
+}
