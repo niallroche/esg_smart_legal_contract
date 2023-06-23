@@ -1,0 +1,115 @@
+namespace com.acme.test
+
+import org.accordproject.contract.* from https://models.accordproject.org/accordproject/contract.cto
+import org.accordproject.runtime.* from https://models.accordproject.org/accordproject/runtime.cto
+import org.accordproject.time.* from https://models.accordproject.org/v2.0/time.cto
+import org.accordproject.organization.Organization from https://models.accordproject.org/organization.cto
+import org.accordproject.money.MonetaryAmount from https://models.accordproject.org/money@0.2.0.cto
+import org.accordproject.party.* from https://models.accordproject.org/accordproject/party.cto
+
+// import org.accordproject.time.Duration from /time@0.2.0.cto
+// import org.accordproject.value.* from https://models.accordproject.org/accordproject/v2.0/value.cto
+
+transaction MyRequest extends Request {
+  o String input
+}
+
+transaction MyResponse extends Response {
+  o String output
+}
+
+// define enum ESGProvider {
+enum ESGProvider {
+   o OpenESG
+}
+
+concept ESGScore {
+  // ESG scores
+  o Integer environmentalScore
+  o Integer governanceScore
+  o Integer socialScore
+  o Boolean verifiedScore
+  // o ESGProvider providerSource
+  o ESGProvider providerSource default = "OpenESG"
+
+  // fixed constants
+  o Integer MinESGScore default = 0
+  o Integer MaxESGScore default = 100
+}
+
+
+/**
+ * Defines the input data required by the template
+ */
+transaction DetermineEmmissionsBreachRequest extends Request {
+
+  /**
+   * If specified the reporting period covered
+   */
+  o Duration emissionsReportingPeriod optional
+
+  /**
+   * What is the actual value of the emmisions?
+   */
+  o Double actualTotalEmissions
+}
+
+/**
+ * Defines the input data required by the template
+ */
+transaction DetermineOpenESGBreachRequest extends Request {
+  o ESGScore score
+}
+
+/**
+ * Defines the output data for the template
+ */
+transaction DetermineEmmissionsBreachResponse extends Response {
+  /**
+   * The penalty to be paid
+   */
+  o Double penalty
+}
+
+/**
+ * The model for the contract
+ */
+asset MyContract extends Contract {
+  /**
+   * The name for the contract
+   */
+  --> Party employer
+  o Boolean usingMingsClause default = true
+  o Boolean deductedPerSubcontractor default = true
+  // o Organization employer
+  // o Participant employer
+  //should have unit of carbon
+  o Double projectedTotalEmissions
+  // o Duration daysAfterReportingEnd default = "30 days"
+  // o Duration daysAfterPeriodEnd default = "60 days"
+
+  o Period daysAfterReportingEnd 
+  o Period daysAfterPeriodEnd
+
+  o Boolean annualReportingUsed default = true
+  o Period contractTargetPlanTimeframe
+  o Double emissionsAllowancePercentage
+  o Double reductionPercentage
+  // o Unit specifedUnit
+  // o UnitOfMass specifedUnit default = "TONNE"
+  o String specifedUnit default = "TONNE"
+  o MonetaryAmount contractValue
+  o Double premiumPortionCap //percentage or fixed amount?
+
+  o MonetaryAmount fixedPenaltyFigure
+  o String nameOfCharity
+  o String websiteUrl
+
+  o Double unverifiedThreshold
+  o Double verifiedThreshold
+  o Boolean verifiedScoreRequired default = false
+
+  o Integer environmentalScore
+  o Integer governanceScore
+  o Integer socialScore
+}

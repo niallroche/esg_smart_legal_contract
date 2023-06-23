@@ -1,0 +1,56 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace com.acme.test
+
+contract MyLogic over MyContract {
+  // Simple Clause
+  clause helloworld(request : MyRequest) : MyResponse {
+    return MyResponse{ output: "Hello " ++ contract.nameOfCharity ++ " " ++ request.input }
+  }
+
+  clause calculatemmissionsbreach(request : DetermineEmmissionsBreachRequest) : DetermineEmmissionsBreachResponse {
+    // Guard against calling late delivery clause too early
+    // let emissions = request.actualTotalEmissions;
+
+    //enforce non-zero amounts in contract and inputs maybe
+
+    enforce request.actualTotalEmissions >= contract.projectedTotalEmissions else
+    return DetermineEmmissionsBreachResponse{
+      penalty: 0.0
+    }
+    ;
+    // actual emmisions exceed projected, but might be within allowed limits
+    let diff = request.actualTotalEmissions - contract.projectedTotalEmissions;
+    let allowedProportion = contract.projectedTotalEmissions * (contract.emissionsAllowancePercentage / 100.0);
+    enforce diff >= allowedProportion else
+    return DetermineEmmissionsBreachResponse{
+      penalty: 0.0
+    };
+
+    let diffUnits = diff; //contract.specifedUnit
+    //may need to map diff into the units (could be kilos to tonnes, presume 1:1)
+    let penaltyPercentate =  diffUnits * (contract.reductionPercentage / 100.0);
+    let contractDeduction = contract.contractValue.doubleValue * penaltyPercentate;
+    //let maxCappedDeduction = contract.contractValue * penaltyPercentate;
+
+    //capped could be at a percentage level or fixed amount
+
+    let capped = min([contractDeduction,contract.premiumPortionCap * contract.contractValue.doubleValue / 100.0]);
+
+    return DetermineEmmissionsBreachResponse{
+      penalty: capped
+    }
+  }
+}

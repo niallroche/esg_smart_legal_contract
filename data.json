@@ -1,0 +1,53 @@
+{
+  "$class": "com.acme.test.MyContract",
+  "employer": "resource:org.accordproject.party.Party#employer",
+  "contractTargetPlanTimeframe": 
+    {
+      "$class": "org.accordproject.time.Period",
+      "amount": 1,
+      "unit": "years"
+    },
+  "emissionsAllowancePercentage": 0.5,
+  "projectedTotalEmissions": 1000.0,
+  "deductedPerSubcontractor":true,
+  "reductionPercentage":0.1,
+  "specifedUnit": "TONNE",
+
+  "daysAfterReportingEnd":
+  {
+    "$class": "org.accordproject.time.Period",
+    "amount": 60,
+    "unit": "days"
+  },
+  "daysAfterPeriodEnd":
+  {
+    "$class": "org.accordproject.time.Period",
+    "amount": 30,
+    "unit": "days"
+  },
+  "contractValue":
+    {
+      "$class": "org.accordproject.money.MonetaryAmount",
+      "doubleValue": 100000,
+      "currencyCode": "GBP"
+    },
+  "nameOfCharity": "some charity",
+  "fixedPenaltyFigure":
+    {
+      "$class": "org.accordproject.money.MonetaryAmount",
+      "doubleValue": 1000,
+      "currencyCode": "GBP"
+    },
+  "premiumPortionCap": 0.2,
+  "websiteUrl": "https:www.example.com",
+
+  "environmentalScore": 80,
+  "governanceScore": 50,
+  "socialScore": 60,
+
+  "unverifiedThreshold" : 0.55,
+  "verifiedThreshold": 0.15,
+
+  "contractId": "fdf45b28-2e92-4835-adbd-a220dad40496",
+  "$identifier": "fdf45b28-2e92-4835-adbd-a220dad40496"
+}
