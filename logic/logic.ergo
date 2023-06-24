@@ -14,6 +14,11 @@
 
 namespace com.thebuildingblocks.regulartech.esg
 
+// import org.accordproject.obligation.*
+// import org.accordproject.cicero.runtime.*
+import org.accordproject.time.*
+import org.accordproject.money.*
+
 contract MyLogic over ESGContract {
   // Sample Clause
   // clause helloworld(request : MyRequest) : MyResponse {
@@ -26,6 +31,7 @@ contract MyLogic over ESGContract {
   // The value of the reduced figure is payable in {{penaltyCurrency}} to an environmental charity {{nameOfCharity}}
   //  at wallet address {{charityWalletAddress}}.
 
+  // clause determineESGScoreBreach(request : ESGScoreBreachRequest) : ESGScoreBreachResponse emits PaymentObligation {
   clause determineESGScoreBreach(request : ESGScoreBreachRequest) : ESGScoreBreachResponse {
 
     // contract.environmentalScore
@@ -58,7 +64,7 @@ contract MyLogic over ESGContract {
       if request.score.verifiedScore 
         then (contract.verifiedThreshold / 100.)
       else (contract.unverifiedThreshold / 100.);
-    info(allowance);
+    info("allowance:" ++ toString(allowance));
 
     let thresholdExceeded = 
       if averageActualEsgScore >= averageCommittedEsgScore
@@ -70,17 +76,19 @@ contract MyLogic over ESGContract {
           then true
         else
           false;
-    info(thresholdExceeded);
+    info("thresholdExceeded" ++ toString(thresholdExceeded);
     if !thresholdExceeded
-      then return ESGScoreBreachResponse {
-        penaltyAmountDeduction: 0.0,
-        penaltyCurrency: contract.penaltyCurrency,
-        nameOfCharity: contract.nameOfCharity,
-        charityWalletAddress: contract.charityWalletAddress,
-        contractorWalletAddress: contract.contractorWalletAddress,
-        paymentAmount: contract.contractValue.doubleValue,
-        contractValue: contract.contractValue
-      }
+      then 
+        // emit PaymentObligation{ amount: contract.contractValue.doubleValue, description: "contractor" };
+        return ESGScoreBreachResponse {
+          penaltyAmountDeduction: 0.0,
+          penaltyCurrency: contract.penaltyCurrency,
+          nameOfCharity: contract.nameOfCharity,
+          charityWalletAddress: contract.charityWalletAddress,
+          contractorWalletAddress: contract.contractorWalletAddress,
+          paymentAmount: contract.contractValue.doubleValue,
+          contractValue: contract.contractValue
+        }
     else
 // let diff = request.actualTotalEmissions - contract.projectedTotalEmissions;
 //     let allowedProportion = contract.projectedTotalEmissions * (contract.emissionsAllowancePercentage / 100.0);
@@ -99,7 +107,8 @@ contract MyLogic over ESGContract {
 
     let penaltyAmountDeduction = contract.contractValue.doubleValue * contract.reductionPercentage;
     let paymentAmount = contract.contractValue.doubleValue - penaltyAmountDeduction;
-
+    // emit PaymentObligation{ amount: contract.contractValue.doubleValue, description: "contractor" };
+    // emit PaymentObligation{ amount: penaltyAmountDeduction, description: "charity" };
     return ESGScoreBreachResponse {
       penaltyAmountDeduction: penaltyAmountDeduction,
       penaltyCurrency: contract.penaltyCurrency,
