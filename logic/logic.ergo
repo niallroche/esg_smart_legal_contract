@@ -34,15 +34,6 @@ contract MyLogic over ESGContract {
   // clause determineESGScoreBreach(request : ESGScoreBreachRequest) : ESGScoreBreachResponse emits PaymentObligation {
   clause determineESGScoreBreach(request : ESGScoreBreachRequest) : ESGScoreBreachResponse {
 
-    // contract.environmentalScore
-    // contract.governanceScore
-    // contract.socialScore
-    // contract.verifiedScore
-
-  // request.environmentalScore
-  // request.governanceScore
-  // request.socialScore
-  // request.verifiedScore
     // validate assumptions
     enforce(request.score.environmentalScore >=0 and request.score.environmentalScore <= 100);
     enforce(request.score.governanceScore >=0 and request.score.governanceScore <= 100);
@@ -53,12 +44,6 @@ contract MyLogic over ESGContract {
 
     let averageActualEsgScore : Double = integerToDouble(request.score.environmentalScore + request.score.governanceScore + request.score.socialScore) / 3.0;
     info(averageActualEsgScore);
-
-    // let allowance : Double = 
-    //   if request.score.verifiedScore 
-    //     then averageCommittedEsgScore * (contract.verifiedThreshold / 100.)
-    //   else averageCommittedEsgScore * (contract.unverifiedThreshold / 100.);
-    // info(allowance);
 
     let allowance : Double = 
       if request.score.verifiedScore 
@@ -76,7 +61,7 @@ contract MyLogic over ESGContract {
           then true
         else
           false;
-    info("thresholdExceeded" ++ toString(thresholdExceeded);
+    info("thresholdExceeded" ++ toString(thresholdExceeded));
     if !thresholdExceeded
       then 
         // emit PaymentObligation{ amount: contract.contractValue.doubleValue, description: "contractor" };
@@ -90,34 +75,19 @@ contract MyLogic over ESGContract {
           contractValue: contract.contractValue
         }
     else
-// let diff = request.actualTotalEmissions - contract.projectedTotalEmissions;
-//     let allowedProportion = contract.projectedTotalEmissions * (contract.emissionsAllowancePercentage / 100.0);
-
-        
-//   let check_allowance verified_score environmental_score governance_score social_score verified_threshold unverified_threshold =
-//   (* Calculate average ESG score *)
-//   let average_esg_score = (environmental_score + governance_score + social_score) / 3 in
-//   (* Allowance based on verification status *)
-//   let allowance = if verified_score then average_esg_score *. (verified_threshold /. 100.) 
-//                   else average_esg_score *. (unverified_threshold /. 100.) in
-//   allowance
-// ;;
-
-    // let capped = min([contractDeduction,contract.premiumPortionCap * contract.contractValue.doubleValue / 100.0]);
-
-    let penaltyAmountDeduction = contract.contractValue.doubleValue * contract.reductionPercentage;
-    let paymentAmount = contract.contractValue.doubleValue - penaltyAmountDeduction;
-    // emit PaymentObligation{ amount: contract.contractValue.doubleValue, description: "contractor" };
-    // emit PaymentObligation{ amount: penaltyAmountDeduction, description: "charity" };
-    return ESGScoreBreachResponse {
-      penaltyAmountDeduction: penaltyAmountDeduction,
-      penaltyCurrency: contract.penaltyCurrency,
-      nameOfCharity: contract.nameOfCharity,
-      charityWalletAddress: contract.charityWalletAddress,
-      contractorWalletAddress: contract.contractorWalletAddress,
-      paymentAmount: paymentAmount,
-      contractValue: contract.contractValue
-    }
+      let penaltyAmountDeduction = contract.contractValue.doubleValue * contract.reductionPercentage;
+      let paymentAmount = contract.contractValue.doubleValue - penaltyAmountDeduction;
+      // emit PaymentObligation{ amount: contract.contractValue.doubleValue, description: "contractor" };
+      // emit PaymentObligation{ amount: penaltyAmountDeduction, description: "charity" };
+      return ESGScoreBreachResponse {
+        penaltyAmountDeduction: penaltyAmountDeduction,
+        penaltyCurrency: contract.penaltyCurrency,
+        nameOfCharity: contract.nameOfCharity,
+        charityWalletAddress: contract.charityWalletAddress,
+        contractorWalletAddress: contract.contractorWalletAddress,
+        paymentAmount: paymentAmount,
+        contractValue: contract.contractValue
+      }
   }
 
   clause calculateEmmissionsBreach(request : DetermineEmmissionsBreachRequest) : DetermineEmmissionsBreachResponse {
