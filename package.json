@@ -1,7 +1,7 @@
 {
-    "name": "sample",
-    "version": "0.0.0",
-    "description": "Name of the person to greet: \"Dan\".\nThank you!",
+    "name": "esg_contract",
+    "version": "0.0.1",
+    "description": "A contract that uses ESG Clauses as part of a legal agreement",
     "author": "Niall Roche",
     "accordproject": {
         "template": "contract",

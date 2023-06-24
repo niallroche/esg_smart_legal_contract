@@ -12,15 +12,106 @@
  * limitations under the License.
  */
 
-namespace com.acme.test
+namespace com.thebuildingblocks.regulartech.esg
 
-contract MyLogic over MyContract {
-  // Simple Clause
-  clause helloworld(request : MyRequest) : MyResponse {
-    return MyResponse{ output: "Hello " ++ contract.nameOfCharity ++ " " ++ request.input }
+contract MyLogic over ESGContract {
+  // Sample Clause
+  // clause helloworld(request : MyRequest) : MyResponse {
+  //   return MyResponse{ output: "Hello " ++ contract.nameOfCharity ++ " " ++ request.input }
+  // }
+
+  // If in any ESG Reporting Period the Actual Total ESG Scores for that ESG Reporting Period is lower than 
+  // the Committed ESG Scores by more than the allowed threshold, 
+  // the Contract Price payable to the Contractor shall be reduced by {{reductionPercentage}}% of the Contract Value. 
+  // The value of the reduced figure is payable in {{penaltyCurrency}} to an environmental charity {{nameOfCharity}}
+  //  at wallet address {{charityWalletAddress}}.
+
+  clause determineESGScoreBreach(request : ESGScoreBreachRequest) : ESGScoreBreachResponse {
+
+    // contract.environmentalScore
+    // contract.governanceScore
+    // contract.socialScore
+    // contract.verifiedScore
+
+  // request.environmentalScore
+  // request.governanceScore
+  // request.socialScore
+  // request.verifiedScore
+    // validate assumptions
+    enforce(request.score.environmentalScore >=0 and request.score.environmentalScore <= 100);
+    enforce(request.score.governanceScore >=0 and request.score.governanceScore <= 100);
+    enforce(request.score.socialScore >=0 and request.score.socialScore <= 100);
+
+    let averageCommittedEsgScore : Double = integerToDouble(contract.environmentalScore + contract.governanceScore + contract.socialScore) / 3.0;
+    info(averageCommittedEsgScore);
+
+    let averageActualEsgScore : Double = integerToDouble(request.score.environmentalScore + request.score.governanceScore + request.score.socialScore) / 3.0;
+    info(averageActualEsgScore);
+
+    // let allowance : Double = 
+    //   if request.score.verifiedScore 
+    //     then averageCommittedEsgScore * (contract.verifiedThreshold / 100.)
+    //   else averageCommittedEsgScore * (contract.unverifiedThreshold / 100.);
+    // info(allowance);
+
+    let allowance : Double = 
+      if request.score.verifiedScore 
+        then (contract.verifiedThreshold / 100.)
+      else (contract.unverifiedThreshold / 100.);
+    info(allowance);
+
+    let thresholdExceeded = 
+      if averageActualEsgScore >= averageCommittedEsgScore
+        then false
+      else
+        let diff = averageCommittedEsgScore - averageActualEsgScore;
+        info(diff);
+        if diff > allowance
+          then true
+        else
+          false;
+    info(thresholdExceeded);
+    if !thresholdExceeded
+      then return ESGScoreBreachResponse {
+        penaltyAmountDeduction: 0.0,
+        penaltyCurrency: contract.penaltyCurrency,
+        nameOfCharity: contract.nameOfCharity,
+        charityWalletAddress: contract.charityWalletAddress,
+        contractorWalletAddress: contract.contractorWalletAddress,
+        paymentAmount: contract.contractValue.doubleValue,
+        contractValue: contract.contractValue
+      }
+    else
+// let diff = request.actualTotalEmissions - contract.projectedTotalEmissions;
+//     let allowedProportion = contract.projectedTotalEmissions * (contract.emissionsAllowancePercentage / 100.0);
+
+        
+//   let check_allowance verified_score environmental_score governance_score social_score verified_threshold unverified_threshold =
+//   (* Calculate average ESG score *)
+//   let average_esg_score = (environmental_score + governance_score + social_score) / 3 in
+//   (* Allowance based on verification status *)
+//   let allowance = if verified_score then average_esg_score *. (verified_threshold /. 100.) 
+//                   else average_esg_score *. (unverified_threshold /. 100.) in
+//   allowance
+// ;;
+
+    // let capped = min([contractDeduction,contract.premiumPortionCap * contract.contractValue.doubleValue / 100.0]);
+
+    let penaltyAmountDeduction = contract.contractValue.doubleValue * contract.reductionPercentage;
+    let paymentAmount = contract.contractValue.doubleValue - penaltyAmountDeduction;
+
+    return ESGScoreBreachResponse {
+      penaltyAmountDeduction: penaltyAmountDeduction,
+      penaltyCurrency: contract.penaltyCurrency,
+      nameOfCharity: contract.nameOfCharity,
+      charityWalletAddress: contract.charityWalletAddress,
+      contractorWalletAddress: contract.contractorWalletAddress,
+      paymentAmount: paymentAmount,
+      contractValue: contract.contractValue
+    }
   }
 
-  clause calculatemmissionsbreach(request : DetermineEmmissionsBreachRequest) : DetermineEmmissionsBreachResponse {
+  clause calculateEmmissionsBreach(request : DetermineEmmissionsBreachRequest) : DetermineEmmissionsBreachResponse {
     // Guard against calling late delivery clause too early
     // let emissions = request.actualTotalEmissions;
 

@@ -1,4 +1,4 @@
-namespace com.acme.test
+namespace com.thebuildingblocks.regulartech.esg
 
 import org.accordproject.contract.* from https://models.accordproject.org/accordproject/contract.cto
 import org.accordproject.runtime.* from https://models.accordproject.org/accordproject/runtime.cto
@@ -9,14 +9,6 @@ import org.accordproject.party.* from https://models.accordproject.org/accordpro
 
 // import org.accordproject.time.Duration from /time@0.2.0.cto
 // import org.accordproject.value.* from https://models.accordproject.org/accordproject/v2.0/value.cto
-
-transaction MyRequest extends Request {
-  o String input
-}
-
-transaction MyResponse extends Response {
-  o String output
-}
 
 // define enum ESGProvider {
 enum ESGProvider {
@@ -54,6 +46,23 @@ transaction DetermineEmmissionsBreachRequest extends Request {
   o Double actualTotalEmissions
 }
 
+transaction ESGScoreBreachRequest extends Request {
+  o ESGScore score
+}
+
+transaction ESGScoreBreachResponse extends Response {
+  /**
+   * The penalty to be paid
+   */
+  o Double penaltyAmountDeduction
+  o String penaltyCurrency
+  o String nameOfCharity
+  o String charityWalletAddress
+  o String contractorWalletAddress
+  o Double paymentAmount
+  o MonetaryAmount contractValue
+}
+
 /**
  * Defines the input data required by the template
  */
@@ -74,7 +83,7 @@ transaction DetermineEmmissionsBreachResponse extends Response {
 /**
  * The model for the contract
  */
-asset MyContract extends Contract {
+asset ESGContract extends Contract {
   /**
    * The name for the contract
    */
@@ -103,6 +112,9 @@ asset MyContract extends Contract {
 
   o MonetaryAmount fixedPenaltyFigure
   o String nameOfCharity
+  o String charityWalletAddress
+  o String contractorWalletAddress
+  o String penaltyCurrency
   o String websiteUrl
 
   o Double unverifiedThreshold

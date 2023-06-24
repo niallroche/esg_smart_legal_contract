@@ -1,5 +1,5 @@
 {
-  "$class": "com.acme.test.MyContract",
+  "$class": "com.thebuildingblocks.regulartech.esg.ESGContract",
   "employer": "resource:org.accordproject.party.Party#employer",
   "contractTargetPlanTimeframe": 
     {
@@ -10,7 +10,7 @@
   "emissionsAllowancePercentage": 0.5,
   "projectedTotalEmissions": 1000.0,
   "deductedPerSubcontractor":true,
-  "reductionPercentage":0.1,
+  "reductionPercentage":0.2,
   "specifedUnit": "TONNE",
 
   "daysAfterReportingEnd":
@@ -32,6 +32,8 @@
       "currencyCode": "GBP"
     },
   "nameOfCharity": "some charity",
+  "charityWalletAddress":"",
+  "contractorWalletAddress":"",
   "fixedPenaltyFigure":
     {
       "$class": "org.accordproject.money.MonetaryAmount",
@@ -45,8 +47,9 @@
   "governanceScore": 50,
   "socialScore": 60,
 
-  "unverifiedThreshold" : 0.55,
-  "verifiedThreshold": 0.15,
+  "unverifiedThreshold" : 5.0,
+  "verifiedThreshold": 10.0,
+  "penaltyCurrency": "HBAR",
 
   "contractId": "fdf45b28-2e92-4835-adbd-a220dad40496",
   "$identifier": "fdf45b28-2e92-4835-adbd-a220dad40496"

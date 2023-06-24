@@ -36,7 +36,7 @@ Emissions Reporting Period]  within 30 days days of the end of such  Emissions R
 
 ***[Drafting note: This may need adjusting depending on the size and capability of subcontractors, as it may place an unfair burden on those lacking the resources to meet the reporting requirements. However, to appropriately set a Contract Target and for the Scope 3 Emissions of the entire chain to be properly assessed, this is necessary. This could be supported by providing funding to subcontractors (i.e. by extending the Employer Assistance clause) in order to decarbonise the supply chain.]***
 
-### [4.25.3] If in any Emissions Reporting Period the Actual Total Emissions for that Emissions Reporting Period exceed the Projected Total Emissions for that Emissions Reporting Period/ Actual Total Emissions of the previous Emissions Reporting Period by more than 0.5%, the Contract Price payable to the Contractor or Subcontractor (as applicable) shall be reduced by 0.1% per "TONNE" of CO2 that the Actual Total Emissions exceed the Projected Total Emissions up to 0.2% of the contract].
+### [4.25.3] If in any Emissions Reporting Period the Actual Total Emissions for that Emissions Reporting Period exceed the Projected Total Emissions for that Emissions Reporting Period/ Actual Total Emissions of the previous Emissions Reporting Period by more than 0.5%, the Contract Price payable to the Contractor or Subcontractor (as applicable) shall be reduced by 0.2% per "TONNE" of CO2 that the Actual Total Emissions exceed the Projected Total Emissions up to 0.2% of the contract].
 
 ***[Drafting note: The first bracketed drafting option may be a disincentive to setting ambitious targets by encouraging the Contractor to overestimate their projected emissions, unless the Employer also evaluates the Projected Total Emissions value and provides a benefit for an ambitious value. A disincentive for exceeding the previous period's Actual Total Emissions may be preferable, since it encourages a reduction in emissions.]***
 
@@ -73,20 +73,30 @@ or a fixed figure payable to an environmental charity (as in Jessica's Clause or
 
 amount is deducted per subcontractor
 
+***[scores are unverified at the moment but could time restrict this]***
+
+***[define the frequency that scores checked and if there is a time window allowed to restore the score. Could mandate verification at regular defined intervals e.g. annually. Could also look at an increasing threshold over time up to a certain level as companies are aiming towards net zero]***
+
+Contract Value 100000.0 GBP
+Contractor Wallet ""
+
 OpenESG Based Clauses
 ====
 
 For the purposes of monitor ESG commitments, the Contractor or Subcontractor (as applicable) will agree to use the [OpenESG] (https://www.openesg.com/) register to measure their ESG Score.
-***[scores are unverified at the moment but could time restrict this]***
 
-***[defined the frequency that scores checked and if there is a time window allowed to restore the score. Could mandate verification at regular defined intervals e.g. annually]***
+The url to validate will be "https:www.example.com"
 
 The Contractor or Subcontractor (as applicable) will agree to keep their OpenESG Score equal to or greater than the following values:
+
+Committed ESG Scores
 -  The Score can be unverified
 -  Committed Environmental Score: 80
 -  Committed Governance Score: 50
 -  Committed Social Score: 60
 
-An allowance up to the following threshhold is permitted
--  The permitted verified threshhold is:0.15%
--  The permitted unverified threshhold is:0.55%
+An allowance up to the following threshhold is permitted depending if the scores require verification.
+-  The permitted verified threshhold is:10.0%
+-  The permitted unverified threshhold is:5.0%
+
+If in any ESG Reporting Period the Actual Total ESG Scores for that ESG Reporting Period is lower than the Committed ESG Scores by more than the allowed threshold, the Contract Price payable to the Contractor shall be reduced by 0.2% of the Contract Value. The value of the reduced figure is payable in "HBAR" to an environmental charity "some charity" at wallet address "".

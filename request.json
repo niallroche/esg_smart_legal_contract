@@ -1,4 +1,9 @@
 {
-    "$class": "com.acme.test.MyRequest",
-    "input": "World"
+    "$class": "com.thebuildingblocks.regulartech.esg.ESGScoreBreachRequest",
+    "score": {
+        "environmentalScore":20,
+        "governanceScore":30,
+        "socialScore":40,
+        "verifiedScore": false
+    }
 }

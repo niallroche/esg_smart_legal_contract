@@ -66,25 +66,30 @@ cap equaling the premium portion of the contract
 
 {{#if deductedPerSubcontractor}}amount is deducted per subcontractor{{/if}}
 
+
+***[scores are unverified at the moment but could time restrict this]***
+
+***[define the frequency that scores checked and if there is a time window allowed to restore the score. Could mandate verification at regular defined intervals e.g. annually. Could also look at an increasing threshold over time up to a certain level as companies are aiming towards net zero]***
+
+Contract Value {{contractValue}}
+Contractor Wallet {{contractorWalletAddress}}
+
 # OpenESG Based Clauses
 
 For the purposes of monitor ESG commitments, the Contractor or Subcontractor (as applicable) will agree to use the [OpenESG] (https://www.openesg.com/) register to measure their ESG Score. 
 
 The url to validate will be {{websiteUrl}}
 
-***[scores are unverified at the moment but could time restrict this]***
-
-***[define the frequency that scores checked and if there is a time window allowed to restore the score. Could mandate verification at regular defined intervals e.g. annually. Could also look at an increasing threshold over time up to a certain level as companies are aiming towards net zero]***
-
 The Contractor or Subcontractor (as applicable) will agree to keep their OpenESG Score equal to or greater than the following values:
 
+Committed ESG Scores
 * {{#if verifiedScoreRequired}}The Score must be verified{{else}}The Score can be unverified{{/if}}
 * Committed Environmental Score: {{environmentalScore}}
 * Committed Governance Score: {{governanceScore}}
 * Committed Social Score: {{socialScore}}
 
-An allowance up to the following threshhold is permitted
+An allowance up to the following threshhold is permitted depending if the scores require verification.
 * The permitted verified threshhold is:{{verifiedThreshold}}%
 * The permitted unverified threshhold is:{{unverifiedThreshold}}%
 
-  
+If in any ESG Reporting Period the Actual Total ESG Scores for that ESG Reporting Period is lower than the Committed ESG Scores by more than the allowed threshold, the Contract Price payable to the Contractor shall be reduced by {{reductionPercentage}}% of the Contract Value. The value of the reduced figure is payable in {{penaltyCurrency}} to an environmental charity {{nameOfCharity}} at wallet address {{charityWalletAddress}}.
