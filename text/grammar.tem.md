@@ -88,7 +88,7 @@ Committed ESG Scores
 * Committed Social Score: {{socialScore}}
 
 An allowance up to the following threshhold is permitted depending if the scores require verification.
-* The permitted verified threshhold is:{{verifiedThreshold}}%
-* The permitted unverified threshhold is:{{unverifiedThreshold}}%
+* The permitted verified threshold is:{{verifiedThreshold}}%
+* The permitted unverified threshold is:{{unverifiedThreshold}}%
 
 If in any ESG Reporting Period the Actual Total ESG Scores for that ESG Reporting Period is lower than the Committed ESG Scores by more than the allowed threshold, the Contract Price payable to the Contractor shall be reduced by {{reductionPercentage}}% of the Contract Value. The value of the reduced figure is payable in {{penaltyCurrency}} to an environmental charity {{nameOfCharity}} at wallet address {{charityWalletAddress}}.

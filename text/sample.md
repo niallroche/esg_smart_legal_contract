@@ -95,7 +95,7 @@ Committed ESG Scores
 -  Committed Social Score: 60
 
 An allowance up to the following threshhold is permitted depending if the scores require verification.
--  The permitted verified threshhold is:10.0%
--  The permitted unverified threshhold is:5.0%
+-  The permitted verified threshold is:10.0%
+-  The permitted unverified threshold is:5.0%
 
 If in any ESG Reporting Period the Actual Total ESG Scores for that ESG Reporting Period is lower than the Committed ESG Scores by more than the allowed threshold, the Contract Price payable to the Contractor shall be reduced by 0.2% of the Contract Value. The value of the reduced figure is payable in "HBAR" to an environmental charity "some charity" at wallet address "".
