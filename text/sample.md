@@ -94,7 +94,7 @@ Committed ESG Scores
 -  Committed Governance Score: 50
 -  Committed Social Score: 60
 
-An allowance up to the following threshhold is permitted depending if the scores require verification.
+An allowance up to the following threshold is permitted depending if the scores require verification.
 -  The permitted verified threshold is:10.0%
 -  The permitted unverified threshold is:5.0%
 

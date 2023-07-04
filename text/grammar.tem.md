@@ -87,7 +87,7 @@ Committed ESG Scores
 * Committed Governance Score: {{governanceScore}}
 * Committed Social Score: {{socialScore}}
 
-An allowance up to the following threshhold is permitted depending if the scores require verification.
+An allowance up to the following threshold is permitted depending if the scores require verification.
 * The permitted verified threshold is:{{verifiedThreshold}}%
 * The permitted unverified threshold is:{{unverifiedThreshold}}%
 
