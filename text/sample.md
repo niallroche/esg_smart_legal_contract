@@ -21,8 +21,7 @@ Additional Clauses
 
 (c) provide an Annual Emissions Report to the "employer" no later than 60 days (Business) Days after the end of each Emissions Reporting Period;
 
-(d) Offset its Residual Emissions relating to performance of this Agreement
-Emissions Reporting Period]  within 30 days days of the end of such  Emissions Reporting Period];
+(d) Offset its Residual Emissions relating to performance of this Agreement for each Emissions Reporting Period within 30 days days of the end of such financial year/ Emissions Reporting Period;
 
 (e) develop the Contract Target Plan within 1 years of signing this Agreement and implement the Contract Target Plan by the Contract Target Date; and
 

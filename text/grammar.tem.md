@@ -15,8 +15,7 @@ ___
 
 (c) provide an Annual Emissions Report to the {{employer}} no later than {{daysAfterReportingEnd}} (Business) Days after the end of each Emissions Reporting Period;
 
-(d) Offset its Residual Emissions relating to performance of this Agreement{{#if annualReportingUsed}} for each financial year {{else}}
- Emissions Reporting Period] {{/if}} within {{daysAfterPeriodEnd}} days of the end of such {{#if annualReportingUsed}}financial year{{else}} Emissions Reporting Period]{{/if}}; 
+(d) Offset its Residual Emissions relating to performance of this Agreement for each{{#if annualReportingUsed}} financial year{{else}} Emissions Reporting Period{{/if}} within {{daysAfterPeriodEnd}} days of the end of such financial year/ Emissions Reporting Period;
 
 (e) develop the Contract Target Plan within {{contractTargetPlanTimeframe}} of signing this Agreement and implement the Contract Target Plan by the Contract Target Date; and
 
